@@ -1,5 +1,7 @@
 package com.marks.hotelapi.entity;
 
+import com.marks.hotelapi.entity.Hospede;
+import com.marks.hotelapi.entity.Quarto;
 import com.marks.hotelapi.enums.StatusReserva;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
