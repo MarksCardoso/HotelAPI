@@ -20,8 +20,11 @@ public class Quarto {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 3)
-    private String quarto;
+    private String nomeQuarto;
 
     @OneToMany(mappedBy = "quarto", cascade = CascadeType.ALL)
     private List<Reserva> reservas;
+
+    @OneToMany(mappedBy = "quarto", cascade = CascadeType.ALL)
+    private List<Consumo> consumos;
 }

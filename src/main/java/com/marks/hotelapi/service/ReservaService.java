@@ -31,7 +31,7 @@ public class ReservaService {
                 reserva.getDataCriacao(),
                 reserva.getHospede().getNome(),
                 reserva.getHospede().getEmail(),
-                reserva.getQuarto().getQuarto()
+                reserva.getQuarto().getNomeQuarto()
         );
     }
 
