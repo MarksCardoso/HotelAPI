@@ -28,7 +28,7 @@ public class ReservaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity buscarPorId(@PathVariable Long id){
+    public ResponseEntity<ReservaResponseDTO> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok().body(reservaService.listarPorId(id));
     }
 
