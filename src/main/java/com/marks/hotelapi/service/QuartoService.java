@@ -17,17 +17,17 @@ public class QuartoService {
     private QuartoDTO converterParaDto(Quarto quarto){
         return new QuartoDTO(
                 quarto.getId(),
-                quarto.getQuarto()
+                quarto.getNomeQuarto()
         );
     }
 
     public QuartoDTO cadastrar(QuartoDTO dto){
-        if (quartoRepository.existsByQuarto(dto.getQuarto())){
+        if (quartoRepository.existsByNomeQuarto(dto.getQuarto())){
             throw new RuntimeException("Quarto ja existe!");
         }
 
         Quarto novoQuarto = new Quarto();
-        novoQuarto.setQuarto(dto.getQuarto());
+        novoQuarto.setNomeQuarto(dto.getQuarto());
 
         return converterParaDto(quartoRepository.save(novoQuarto));
 
@@ -45,7 +45,7 @@ public class QuartoService {
     public QuartoDTO atualizar(Long id, QuartoDTO dto){
         Quarto novoQuarto = quartoRepository.findById(id).orElseThrow(() -> new QuartoNaoEncontradoException(id));
 
-        novoQuarto.setQuarto(dto.getQuarto());
+        novoQuarto.setNomeQuarto(dto.getQuarto());
 
         return converterParaDto(quartoRepository.save(novoQuarto));
     }
