@@ -4,6 +4,7 @@ import com.marks.hotelapi.dto.ConsumoRequestDTO;
 import com.marks.hotelapi.dto.ConsumoResponseDTO;
 import com.marks.hotelapi.entity.Consumo;
 import com.marks.hotelapi.entity.Quarto;
+import com.marks.hotelapi.exception.QuartoNaoEncontradoException;
 import com.marks.hotelapi.repository.ConsumoRepository;
 import com.marks.hotelapi.repository.QuartoRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class ConsumoService {
 
     public ConsumoResponseDTO criar(ConsumoRequestDTO consumo){
         if (!quartoRepository.existsById(consumo.getQuartoId())){
-            throw new RuntimeException("Quarto nao existe");
+            throw new QuartoNaoEncontradoException(consumo.getQuartoId());
         }
 
         Consumo novoConsumo = new Consumo();
@@ -35,7 +36,7 @@ public class ConsumoService {
         novoConsumo.setValor(consumo.getPreco());
         novoConsumo.setDataCriacao(LocalDateTime.now());
 
-        Quarto quarto = quartoRepository.findById(consumo.getQuartoId()).orElseThrow(() -> new RuntimeException("Quarto nao encontrado com este ID"));
+        Quarto quarto = quartoRepository.findById(consumo.getQuartoId()).orElseThrow(() -> new QuartoNaoEncontradoException(consumo.getQuartoId()));
 
         novoConsumo.setQuarto(quarto);
 

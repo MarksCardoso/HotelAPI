@@ -6,6 +6,7 @@ import com.marks.hotelapi.entity.Hospede;
 import com.marks.hotelapi.entity.Quarto;
 import com.marks.hotelapi.entity.Reserva;
 import com.marks.hotelapi.enums.StatusReserva;
+import com.marks.hotelapi.exception.QuartoNaoEncontradoException;
 import com.marks.hotelapi.repository.HospedeRepository;
 import com.marks.hotelapi.repository.QuartoRepository;
 import com.marks.hotelapi.repository.ReservaRepository;
@@ -51,7 +52,7 @@ public class ReservaService {
                 .orElseThrow(() -> new RuntimeException("Hospede não encontrado!"));
 
         Quarto quarto = quartoRepository.findById(dto.getQuartoId())
-                .orElseThrow(() -> new RuntimeException("Quarto não encontrado!"));
+                .orElseThrow(() -> new QuartoNaoEncontradoException(dto.getQuartoId()));
 
         Reserva novaReserva = new Reserva();
         novaReserva.setDataCheckIn(dto.getDataCheckIn());
@@ -77,7 +78,7 @@ public class ReservaService {
         Reserva novaReserva = reservaRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Reserva nao encontrada"));
 
-        Quarto quarto = quartoRepository.findById(dto.getQuartoId()).orElseThrow(() -> new RuntimeException("Quarto nao encontrado"));
+        Quarto quarto = quartoRepository.findById(dto.getQuartoId()).orElseThrow(() -> new QuartoNaoEncontradoException(dto.getQuartoId()));
 
         Hospede hospede = hospedeRepository.findById(dto.getHospedeId()).orElseThrow(() -> new RuntimeException("Hospede nao encontrado"));
 
